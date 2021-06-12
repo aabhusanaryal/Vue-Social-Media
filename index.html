@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Social Media</title>
+    <script src="https://unpkg.com/vue@next"></script>
+    <script src="./app.js" defer></script>
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+    <header>The Social Media</header>
+    <div class="container">
+        <div id="app">
+                <template v-for="post in posts">
+                    <div class="post">
+                        <p class="posttitle">{{post.title}}</p>
+                        <p class="authorname">{{post.author}}</p>
+                        <p>{{post.description}}</p>
+                        <div class="comments">Comments:
+                            <div v-if="post.comments.length==0">No comments yet!</div>
+                            <div v-for="comment in post.comments" class="comment">
+                                <p>{{comment.description}}</p>
+                                <p>-{{comment.author}}</p>
+                            </div>
+                            <label for="newComment">Post a new comment:</label>
+                            <input type="text" name="newComment" class="newComment" v-model="newComment" @keyup.enter="addComment(post)">
+                        </div>
+                    </div>
+                </template>
+        <div class="post">
+            <p class="posttitle">Publish a new post:</p>
+            <form action=""></form>
+            <label for="name">
+                Name:
+            </label>
+            <input type="text" name="name" v-model="newPost.author">
+            <label for="title">
+                Title:
+            </label>
+            <input type="text" name="title" v-model="newPost.title">
+            Post Content:
+            <textarea v-model="newPost.description">
+
+            </textarea>
+            <button @click="pushNewPost">Post</button>
+        </div>
+    </div>
+    </div>
+</body>
+</html>
